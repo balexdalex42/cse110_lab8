@@ -9,7 +9,12 @@ self.addEventListener('install', function (event) {
     caches.open(CACHE_NAME).then(function (cache) {
       // B6. TODO - Add all of the URLs from RECIPE_URLs here so that they are
       //            added to the cache when the ServiceWorker is installed
-      return cache.addAll([]);
+      return cache.addAll(['https://adarsh249.github.io/Lab8-Starter/recipes/1_50-thanksgiving-side-dishes.json',
+          'https://adarsh249.github.io/Lab8-Starter/recipes/2_roasting-turkey-breast-with-stuffing.json',
+          'https://adarsh249.github.io/Lab8-Starter/recipes/3_moms-cornbread-stuffing.json',
+          'https://adarsh249.github.io/Lab8-Starter/recipes/4_50-indulgent-thanksgiving-side-dishes-for-any-holiday-gathering.json',
+          'https://adarsh249.github.io/Lab8-Starter/recipes/5_healthy-thanksgiving-recipe-crockpot-turkey-breast.json',
+          'https://adarsh249.github.io/Lab8-Starter/recipes/6_one-pot-thanksgiving-dinner.json',]);
     })
   );
 });
@@ -34,6 +39,20 @@ self.addEventListener('fetch', function (event) {
   /*******************************/
   // B7. TODO - Respond to the event by opening the cache using the name we gave
   //            above (CACHE_NAME)
+  event.respondWith(caches.open(CACHE_NAME).then((cache) => {
+      // Respond with the image from the cache or from the network
+      return cache.match(event.request).then((cachedResponse) => {
+        return cachedResponse || fetch(event.request).then((fetchedResponse) => {
+          // Add the network response to the cache for future visits.
+          // Note: we need to make a copy of the response to save it in
+          // the cache and use the original as the request response.
+          cache.put(event.request, fetchedResponse.clone());
+
+          // Return the network response
+          return fetchedResponse;
+        });
+      });
+  }));
   // B8. TODO - If the request is in the cache, return with the cached version.
   //            Otherwise fetch the resource, add it to the cache, and return
   //            network response.
