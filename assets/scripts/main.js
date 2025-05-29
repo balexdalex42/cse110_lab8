@@ -85,8 +85,10 @@ async function getRecipes() {
   //            If there are recipes, return them.
   /**************************/
   let recipesString = localStorage.getItem('recipes');
-  if(recipesString !== null)
+  if(recipesString !== null){
+      console.log('Loaded recipes from localStorage');
       return JSON.parse(recipesString);
+  }
   // The rest of this method will be concerned with requesting the recipes
   // from the network
   // A2. TODO - Create an empty array to hold the recipes that you will fetch
@@ -94,6 +96,7 @@ async function getRecipes() {
   return new Promise(async (resolve, reject) =>{
     for(const recipeURL of RECIPE_URLS){
       try{
+        console.log('No recipes in localStorage, fetching from network...');
         let fetchPromise = await fetch(recipeURL);
         let obj = await fetchPromise.json();
         recipesArr.push(obj);
