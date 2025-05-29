@@ -96,7 +96,7 @@ async function getRecipes() {
   return new Promise(async (resolve, reject) =>{
     for(const recipeURL of RECIPE_URLS){
       try{
-        console.log('No recipes in localStorage, fetching from network...');
+        console.log(`Fetching recipe from: ${recipeURL}`);
         let fetchPromise = await fetch(recipeURL);
         let obj = await fetchPromise.json();
         recipesArr.push(obj);

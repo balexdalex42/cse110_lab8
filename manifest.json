@@ -2,7 +2,7 @@
     "name": "cse110_lab8",
     "short_name": "Alexander Tatoian",
     "description": "A Recipe Card Website",
-    "start_url": "/index.html",
+    "start_url": "cse110_lab8/index.html",
     "display": "fullscreen",
     "background_color": "#FFFFFF",
     "theme_color": "#4CAF50",
