@@ -4,7 +4,7 @@
     "description": "A Recipe Card Website",
     "start_url": "/index.html",
     "display": "fullscreen",
-    "background_color": "0xFFFFFF",
+    "background_color": "#FFFFFF",
     "theme_color": "#4CAF50",
     "icons": [
       {
